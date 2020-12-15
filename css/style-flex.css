@@ -1,0 +1,130 @@
+:root {
+    --headerHeight: 180px;
+    --middleHeight: calc(100vh - (var(--headerHeight) + var(--footerHeight)));
+    --footerHeight: var(--headerHeight);
+    --sidebarWidth: 180px;
+    --headerPadding: 10px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.container>div {
+    font-family: monospace;
+    font-size: 14px;
+    text-align: left;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.img-responsive {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.header {
+    flex-basis: 100%;
+    height: var(--headerHeight);
+    display: flex;
+    flex-wrap: wrap;
+
+    padding-top: var(--headerPadding);
+}
+
+.sidebar {
+    flex: 0 0 var(--sidebarWidth);
+}
+
+/* content */
+.content {
+    flex: 3;
+    height: var(--middleHeight);
+    /* custom */
+    padding: 0 20px;
+    overflow-y: scroll;
+}
+
+.content > h1 {
+    margin-bottom: 10px;
+}
+
+.content > p {
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+/* end content */
+
+.sidebar-r {
+    flex: 0 0 var(--sidebarWidth);
+}
+
+.footer {
+    flex-basis: 100%;
+    height: var(--footerHeight);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer>p {
+    text-align: center;
+    font-weight: bold;
+    align-self: flex-end;
+}
+
+.logo {
+    flex: 0 0 var(--sidebarWidth);
+    height: calc(100% - var(--headerPadding));
+}
+
+.title-menu div.menu {
+    margin-top: 10px;
+}
+
+.site-title p {
+    font-weight: bold;
+}
+
+.menu {
+    grid-area: menu;
+    border: 1px solid black;
+    width: fit-content;
+}
+
+.menu ul {
+    padding: 5px;
+}
+
+.menu li {
+    list-style-type: none;
+    margin-right: 8px;
+    display: inline;
+}
+
+.menu a {
+    color: blue;
+    text-decoration: none;
+}
+
+.menu a:hover {
+    color: red;
+    text-decoration: underline;
+}
+
+.menu a.active {
+    color: red;
+    text-decoration: underline;
+}
