@@ -1,0 +1,3 @@
+files:
+  - source: /*.html
+    translation: /translated/test/%language%/%file_extension%.%file_extension%
