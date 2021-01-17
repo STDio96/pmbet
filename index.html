@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeWork 7</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div id="toolbar">
+        <div id="create" class="toolbar-icon" onclick="createFile()">
+            <img src="./icons/create.png" alt="Create file" title="Create file">
+        </div>
+        <div id="edit" class="toolbar-icon" onclick="renameFile()">
+            <img src="./icons/edit.png" alt="Rename file" title="Rename file">
+        </div>
+        <div id="trash" class="toolbar-icon" onclick="deleteFile()">
+            <img src="./icons/trash.png" alt="Delete file(s)" title="Delete file(s)">
+        </div>
+    </div>
+
+    <div id="main"></div>
+
+    <ul id="context-menu" class="hide">
+        <li id="create-btn" class="hide menu-item" onclick="createFile()">Create</li>
+        <li id="rename-btn" class="menu-item" onclick="renameFile()">Rename</li>
+        <li id="delete-btn" class="menu-item" onclick="deleteFile()">Delete</li>
+    </ul>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
