@@ -1,0 +1,35 @@
+.container {
+    max-width: 960px;
+}
+
+.stats {
+    background: #f2f5f8 !important;
+    color: #000 !important
+}
+
+.articles {
+    font-size: 10px;
+    color: #a1aab9
+}
+
+.number, .number {
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.followers {
+    font-size: 10px;
+    color: #a1aab9
+}
+
+.ml-1 {
+    margin-left: 1em;
+}
+
+#message-block {
+    margin-bottom: 0;
+}
+
+.mr-1 {
+    margin-right: 1em;
+}
