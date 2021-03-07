@@ -4,7 +4,7 @@ const MONTHS = ['Января', 'Февраля', 'Марта', 'Апреля', 
 const convertDate = (date) => {
     let tmp = new Date(date.split('/').reverse().join('-'));
     
-    return `${DAYS[tmp.getDay()] ?? ''} ${tmp.getDate()} ${MONTHS[tmp.getMonth()]?.toLowerCase() ?? ''} ${tmp.getFullYear()} года`;
+    return `${DAYS[tmp.getDay()] + ',' ?? ''} ${tmp.getDate()} ${MONTHS[tmp.getMonth()]?.toLowerCase() ?? ''} ${tmp.getFullYear()} года`;
 }
 
 export default convertDate;

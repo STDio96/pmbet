@@ -3,11 +3,18 @@ import WeatherCard from './WeatherCard';
 
 class WeatherList extends React.Component {
     render() {
-        return <ul>
+        const styles = {
+            margin: "0 auto",
+            width: "1070px",
+            justifyContent: "center",
+            marginTop: "15px"
+        }
+
+        return <div className="row" style={styles}>
             {this.props.weatherData.map((card) => {
                 return <WeatherCard key={card.id} cardData={card} />
             })}
-        </ul>
+        </div>
     }
 }
 
