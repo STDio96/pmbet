@@ -22,7 +22,7 @@ class Card extends React.Component {
         let newCard = this.state.card;
         newCard.rating = rating;
 
-        console.log('rating has been changed:', rating, this.state.card.rating);
+        // console.log('rating has been changed:', rating, this.state.card.rating);
         this.setState(({
             card: newCard,
         }),
@@ -32,12 +32,12 @@ class Card extends React.Component {
 
     // passing to the parent element (Column)
     cardUpdatedEvent() {
-        this.props.cardUpdatedHandler(this.state.card);
+        this.props.cardUpdateHandler(this.state.card);
     }
 
     // passing to the parent element (Column)
     removeCard() {
-        console.log('removing card');
+        // console.log('removing card');
 
         this.props.cardRemoveHandler(this.props.cardData.id);
     }

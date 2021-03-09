@@ -3,8 +3,12 @@ const MONTHS = ['Января', 'Февраля', 'Марта', 'Апреля', 
 
 const convertDate = (date, withTime = false) => {
     let tmp = new Date(date);
-    
-    let time = withTime ? tmp.getHours() + ':' + tmp.getMinutes() + ':' + tmp.getSeconds() : '';
+
+    let time = withTime ?
+        (("0" + tmp.getHours()).slice(-2) + ":"
+            + ("0" + tmp.getMinutes()).slice(-2) + ":"
+            + ("0" + tmp.getSeconds()).slice(-2))
+        : '';
 
     return `${DAYS[tmp.getDay()] + ',' ?? ''} ${tmp.getDate()} ${MONTHS[tmp.getMonth()]?.toLowerCase() ?? ''} ${tmp.getFullYear()} года в ${time}`;
 }

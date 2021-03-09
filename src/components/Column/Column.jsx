@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from '../Card/Card';
+import NewCardForm from '../NewCardForm/NewCardForm';
 import './style.css'
 
 class Column extends React.Component {
@@ -8,7 +9,7 @@ class Column extends React.Component {
 
         this.state = {
             cardList: [
-                {
+                /* {
                     id: 1,
                     title: "test1",
                     rating: 2,
@@ -19,60 +20,35 @@ class Column extends React.Component {
                     title: "test2",
                     rating: 0,
                     createdAt: Date.now()
-                }
+                } */
             ],
             working: false // if we do something with the column (adding/editing) :)
         }
 
         this.createCard = this.createCard.bind(this);
-        /* this.updateCard = this.updateCard.bind(this);
-        this.removeCard = this.removeCard.bind(this); */
         this.orderCards = this.orderCards.bind(this);
-        this.cardUpdatedHandler = this.cardUpdatedHandler.bind(this);
+        this.cardUpdateHandler = this.cardUpdateHandler.bind(this);
         this.cardRemoveHandler = this.cardRemoveHandler.bind(this);
+        this.submitHandler = this.submitHandler.bind(this);
     }
 
     createCard = (cardData) => {
-        cardData = { id: Date.now(), title: Date.now(), rating: Math.floor(Math.random() * 2 + Math.random() * -2 + 1), createdAt: Date.now() };
-        console.log('Creating a card :)', cardData);
-        this.setState(
-            (state) => ({
-                cardList: [...state.cardList, cardData],
-                working: false,
-            }),
-            () => this.orderCards());
-
+        this.setState({
+            working: true,
+        });
     }
 
-    /* updateCard = () => {
-        console.log('Updating a card :)');
-    } */
-
-    /* removeCard = () => {
-        console.log('Removing a card :)');
-        this.state.cardList.splice(-1, 1);
-
-        this.setState({
-            cardList: [...this.state.cardList],
-        });
-    } */
-
     orderCards = () => {
-        console.log('ordering');
-
         this.setState((state) => ({
             cardList: state.cardList.sort(function (a, b) {
-                // console.log('ordering:', a, b);
                 return b.rating - a.rating;
             }),
         }));
-
-        // console.log('ordered', this.state)
     }
 
-    cardUpdatedHandler(cardToUpdate) {
+    cardUpdateHandler(cardToUpdate) {
         let index = this.state.cardList.findIndex((card) => card.id === cardToUpdate.id);
-        console.log('UP UPDATED HANDLER', index, cardToUpdate);
+        // console.log('parent update handler', index, cardToUpdate);
 
         if (index !== -1) {
             let listCopy = this.state.cardList;
@@ -85,35 +61,60 @@ class Column extends React.Component {
     }
 
     cardRemoveHandler(cardToRemove) {
-        console.log('card to remove:', cardToRemove)
+        // console.log('card to remove:', cardToRemove)
 
         this.setState({
             cardList: this.state.cardList.filter((card) => card.id !== cardToRemove)
         })
     }
 
+    submitHandler(title) {
+        // console.log('submitHandler', title)
+        let id = Date.now();
+        let cardData = {
+            id, // id: id
+            title, // title: title
+            rating: 0,
+            createdAt: id
+        }
+
+        // console.log('Creating a card :)', cardData);
+        this.setState(
+            (state) => ({
+                cardList: [...state.cardList, cardData],
+                working: false,
+            }),
+            () => this.orderCards());
+    }
+
     render() {
-        console.log('trying to render', this.state.cardList)
+        // console.log('trying to render', this.state.cardList)
         let { title, color } = this.props;
         let count = this.state.cardList.length;
-        let { cardUpdatedHandler, cardRemoveHandler } = this;
+        let { cardUpdateHandler, cardRemoveHandler, submitHandler } = this;
 
-        console.log(this.state.cardList)
         return <div className="card-column col-4 mx-1" style={{ backgroundColor: color }}>
-            <h1>{title ?? 'no title'} <span>{count}</span></h1>
+            <div className="card-column-title d-flex">
+                <h3>{title ?? 'no title'} <span className="small">[{count}]</span></h3>
+                {!this.state.working && (
+                    <button className={`btn btn-success ml-auto ${this.state.working ? 'd-none' : ''}`} onClick={this.createCard}><i className="bi bi-plus-square"></i> Create</button>
+                )}
+            </div>
+
+            <hr />
+
+            {this.state.working && (
+                <NewCardForm submitHandler={submitHandler} />
+            )}
 
             <div className="card-list">
                 {this.state.cardList.map(card => {
                     return <Card key={card.id}
-                            cardUpdatedHandler={cardUpdatedHandler}
-                            cardRemoveHandler={cardRemoveHandler}
-                            cardData={card} />
+                        cardUpdateHandler={cardUpdateHandler}
+                        cardRemoveHandler={cardRemoveHandler}
+                        cardData={card} />
                 })}
             </div>
-
-            <button className="btn btn-success" onClick={this.createCard}><i className="bi bi-plus-square"></i> Create</button>
-            {/* <button onClick={this.updateCard}>Update</button> */}
-            {/* <button onClick={this.removeCard}>Delete</button> */}
         </div>
     }
 }
