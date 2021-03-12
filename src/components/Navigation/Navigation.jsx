@@ -27,7 +27,7 @@ class Navigation extends React.Component {
                             </NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink to='/todo' className="nav-link" activeClassName="active">
+                            <NavLink to='/todos' className="nav-link" activeClassName="active">
                                 Todo
                             </NavLink>
                         </li>
