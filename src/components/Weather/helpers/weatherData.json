@@ -1,0 +1,101 @@
+[
+    {
+        "id": 1,
+        "date": "28/02/2021",
+        "tMin": -3,
+        "tMax": 7,
+        "pressure": 3000,
+        "humidity": 75,
+        "windSpeed": 0,
+        "windDirection": "",
+        "description": "дождь"
+    },
+    {
+        "id": 2,
+        "date": "01/03/2021",
+        "tMin": -1,
+        "tMax": 5,
+        "pressure": 3001,
+        "humidity": 75,
+        "windSpeed": 1,
+        "windDirection": "NE",
+        "description": "снег"
+    },
+    {
+        "id": 3,
+        "date": "02/03/2021",
+        "tMin": 2,
+        "tMax": 9,
+        "pressure": 3002,
+        "humidity": 75,
+        "windSpeed": 2,
+        "windDirection": "N",
+        "description": "гроза"
+    },
+    {
+        "id": 4,
+        "date": "03/03/2021",
+        "tMin": 1,
+        "tMax": 10,
+        "pressure": 3003,
+        "humidity": 75,
+        "windSpeed": 3,
+        "windDirection": "SE",
+        "description": "мокрый снег"
+    },
+    {
+        "id": 5,
+        "date": "04/03/2021",
+        "tMin": -10,
+        "tMax": -3,
+        "pressure": 3004,
+        "humidity": 75,
+        "windSpeed": 4,
+        "windDirection": "S",
+        "description": "дождь"
+    },
+    {
+        "id": 6,
+        "date": "05/03/2021",
+        "tMin": 0,
+        "tMax": 3,
+        "pressure": 3005,
+        "humidity": 75,
+        "windSpeed": 5,
+        "windDirection": "E",
+        "description": "снег"
+    },
+    {
+        "id": 7,
+        "date": "06/03/2021",
+        "tMin": 1,
+        "tMax": 10,
+        "pressure": 3006,
+        "humidity": 75,
+        "windSpeed": 6,
+        "windDirection": "SW",
+        "description": "ясно"
+    },
+    {
+        "id": 8,
+        "date": "07/03/2021",
+        "tMin": 7,
+        "tMax": 14,
+        "pressure": 3007,
+        "humidity": 75,
+        "windSpeed": 7,
+        "windDirection": "NW",
+        "description": "неопределенность"
+    },
+    {
+        "id": 9,
+        "date": "08/03/2021",
+        "tMin": 5,
+        "tMax": 9,
+        "pressure": 3008,
+        "humidity": 75,
+        "windSpeed": 8,
+        "windDirection": "NE",
+        "description": "no description here"
+    }
+]
