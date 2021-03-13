@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import SearchField from './SearchField/SearchField';
+import CreteTodoForm from './CreteTodoForm/CreteTodoForm';
 import TodoItem from './TodoItem/TodoItem';
+import SelectUser from './SelectUser/SelectUser';
 
 class Todos extends Component {
     constructor(props) {
@@ -17,7 +20,7 @@ class Todos extends Component {
 
         this.changeSelectedUserId = this.changeSelectedUserId.bind(this);
         this.createTodo = this.createTodo.bind(this);
-        this.changeStatus = this.changeStatus.bind(this);
+        this.searchText = this.searchText.bind(this);
     }
 
     addUsers(users) {
@@ -54,18 +57,14 @@ class Todos extends Component {
 
     changeSelectedUserId(e) {
         this.setState({
-            selectedUserId: e.target.value
+            selectedUserId: e.target.value,
+            userTodos: []
         }, () => {
             this.loadUserTodos();
         })
     }
 
-    createTodo(e) {
-        e.preventDefault();
-
-        // т.к. input в форме первый (нулевой)
-        let title = e.target[0].value;
-
+    createTodo(title) {
         let request = {
             title: title,
             completed: false,
@@ -75,27 +74,26 @@ class Todos extends Component {
         fetch('https://jsonplaceholder.typicode.com/todos', {
             method: 'POST',
             body: JSON.stringify(request),
+        }).then((data) => {
+            this.setState({
+                userTodos: [...this.state.userTodos, {
+                    id: Date.now(),
+                    title: title,
+                    completed: false,
+                    userId: this.state.selectedUser
+                }]
+            });
         }).catch((err) => {
             alert('something went wrong: ' + err);
             return;
         });
-
-        this.setState({
-            userTodos: [...this.state.userTodos, {
-                id: Date.now(),
-                title,
-                completed: false,
-                userId: this.state.selectedUser
-            }]
-        });
-
-        e.target[0].value = '';
     }
 
-    changeStatus(e) {
-        e.preventDefault();
-
-        console.log('changing todo\' status', e);
+    searchText(text) {
+        console.log('searching for:', text);
+        this.setState({
+            lookingFor: text
+        });
     }
 
     // system
@@ -105,36 +103,54 @@ class Todos extends Component {
             .then((data) => this.addUsers(data))
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        // TODO: not sure if I need it :)
-    }
-
     render() {
-        let { users, selectedUserId, userTodos } = this.state;
-        let { createTodo, changeStatus } = this;
+        let { users, userTodos } = this.state;
+        let { createTodo, changeSelectedUserId, searchText } = this;
 
-        console.log('users', users)
-        return <div className='container w-50'>
-            <select className="custom-select" onChange={this.changeSelectedUserId}>
-                {users.map((user) => {
-                    return <option key={user.id} value={user.id}>
-                        {user.name}
-                    </option>
-                })}
-            </select>
-            <hr />
-            Selected user: {selectedUserId} <hr />
-            His todos:
-            <div className="list-group">
-                {userTodos.map((todo) => {
-                    return <TodoItem key={todo.id} todoData={todo} onClick={changeStatus} />
-                })}
+        // console.log('users', users)
+        return <div className='container w-75'>
+            <div className='row'>
+                <div className='col-3'>
+                    {/* {users.length === 0 && 'Loading...'}
+                    {users.length > 0 && */}
+                    <SelectUser users={users} changeSelectedUserId={changeSelectedUserId} />
+                    {/* } */}
+                    {/* <select className="custom-select" onChange={changeSelectedUserId}>
+                        {users.map((user) => {
+                            return <option key={user.id} value={user.id}>
+                                {user.name}
+                            </option>
+                        })}
+                    </select> */}
+                </div>
+                <div className='col-6'>
+                    {/* <form onSubmit={createTodo}>
+                        <div className="input-group">
+                            <input type="text" className="form-control" placeholder="Type new todo here" />
+                            <div className="input-group-append">
+                                <button className="btn btn-info" type="submit">Create</button>
+                            </div>
+                        </div>
+                    </form> */}
+                    <CreteTodoForm onSubmit={createTodo} />
+                </div>
+                <div className='col-3'>
+                    <SearchField onChange={searchText} />
+                </div>
             </div>
-
-            <form onSubmit={createTodo}>
-                <input type='text' placeholder='todo' />
-                <button type='submit'>Send</button>
-            </form>
+            <div className='row mt-2'>
+                <div className='col-12'>
+                    {userTodos.length === 0 && 'Loading...'}
+                    {userTodos.length > 0 &&
+                        <div className="list-group">
+                            <h4>Todos</h4>
+                            {userTodos.map((todo) => {
+                                return <TodoItem key={todo.id} todoData={todo} lookingFor={this.state.lookingFor} />
+                            })}
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
     }
 }
