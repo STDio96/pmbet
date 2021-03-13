@@ -2,12 +2,7 @@ import React from 'react';
 import withTodoItem from '../enhancers/withTodoItem';
 
 const TodoItem = ({ todoData, markAsCompleted, lookingFor }) => {
-    // console.log('looking for in component:', lookingFor)
-
-    let formatedTitle = '';
-    let title = todoData.title;
-
-    formatedTitle = { __html: title.replaceAll(lookingFor, `<span style='background-color: red; color: black;'>${lookingFor}</span>`) };
+    let formatedTitle = { __html: todoData.title.replaceAll(lookingFor, `<span style='background-color: red; color: black;'>${lookingFor}</span>`) };
 
     return <button
                 type="button"

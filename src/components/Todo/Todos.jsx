@@ -111,27 +111,9 @@ class Todos extends Component {
         return <div className='container w-75'>
             <div className='row'>
                 <div className='col-3'>
-                    {/* {users.length === 0 && 'Loading...'}
-                    {users.length > 0 && */}
                     <SelectUser users={users} changeSelectedUserId={changeSelectedUserId} />
-                    {/* } */}
-                    {/* <select className="custom-select" onChange={changeSelectedUserId}>
-                        {users.map((user) => {
-                            return <option key={user.id} value={user.id}>
-                                {user.name}
-                            </option>
-                        })}
-                    </select> */}
                 </div>
                 <div className='col-6'>
-                    {/* <form onSubmit={createTodo}>
-                        <div className="input-group">
-                            <input type="text" className="form-control" placeholder="Type new todo here" />
-                            <div className="input-group-append">
-                                <button className="btn btn-info" type="submit">Create</button>
-                            </div>
-                        </div>
-                    </form> */}
                     <CreteTodoForm onSubmit={createTodo} />
                 </div>
                 <div className='col-3'>
